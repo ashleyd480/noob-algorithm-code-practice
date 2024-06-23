@@ -9,20 +9,18 @@ Problem Text:
 Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
 
 Example 1:
-
 Input: nums = [-1,0,3,5,9,12], target = 9
 Output: 4
 Explanation: 9 exists in nums and its index is 4
 
 Example 2:
-
 Input: nums = [-1,0,3,5,9,12], target = 2
 Output: -1
 Explanation: 2 does not exist in nums so return -1
 
 ---
 
-# Java
+# Java Solution
 
 ## Initial Solution
 
@@ -49,7 +47,7 @@ Notice however this means looping through the entire array.length which can be n
 Let's pretend you are a neat freak and you alphabetize your eight drawers, so the drawers stack top down A to Z. You start from the middle drawer, and if you see hoodies, then you know you go to search drawers further down for socks. S goes after H.
 Now imagine the time saved from doing that vs opening all your drawers.
 
-That is the general idea behind binary search.
+That is the general idea behind binary search. Note: binary search only works with sorted arrays.
 
 Here is the solution with binary search.
 
@@ -93,13 +91,13 @@ There are 6 numbers in the array.
 At index 2, we have the number 3.
 3 is less than the target of 9, so we go to search higher.
 
-2. Now we have `left: 3` and `right: 5`.  The `middle` becomes 4. 
+2. Now, we have `left: 3` and `right: 5`.  The `middle` becomes 4. 
 At index 4, we have the number 9 which is equal to 9. 
 
 
 ---
 
-# Javascript
+# Javascript Solution
 
 ```
 /**
