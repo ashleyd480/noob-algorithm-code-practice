@@ -138,5 +138,4 @@ const searchInsert = (nums, target) => {
     }
     return left;
 }
-
 ```

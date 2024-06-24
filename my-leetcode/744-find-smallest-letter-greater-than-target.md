@@ -177,6 +177,8 @@ class Solution {
 
 ---
 # Javascript
+
+```
 const nextGreatestLetter = (letters, target) => {
     let left = 0;
     let right = letters.length - 1;
@@ -196,3 +198,7 @@ const nextGreatestLetter = (letters, target) => {
     // If no character greater than target is found, return the first character
     return closestSoFar > target ? closestSoFar : letters[0];
 };
+```
+
+Oh, and another cool thing I learned while doing this. I was wondering how come Javascript is slower than Java.
+Here's the answer from ChatGpt "Java runs on the Java Virtual Machine (JVM), which is highly optimized for performance and has Just-In-Time (JIT) compilation, garbage collection, and other advanced optimization techniques." Also since Java is strictly typed, vs Javascript is dynamically typed which is why Javascript can have overhead. 
