@@ -4,8 +4,9 @@
 ---
 # Problem 
 
-Link: https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/
-Problem Text: 
+**Link:** https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/
+
+**Problem Text:** 
 You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters.
 
 Return the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.
@@ -40,12 +41,12 @@ So if the target is z OR if no letter is gretater than target, we return letters
 
 
 ## Initial Approach
-// Let's start with a simple loop. `["c","f","j"], target = "a"`
-// So is c > a? Yes, then we exit the loop. 
+// Let's start with a simple loop. `["c","f","j"], target = "a"`    
+// So is c > a? Yes, then we exit the loop.   
 // So as we iterate- as soon as letters[i] > target --> return letters[i] and we break out the loop
-// Else if no match after looping through it, return letters [0]
-// But we know that this may not be efficient esp with larger data sets. Would you want to open 10,000 drawers to find your socks?
---> if letters[i] > target --> return letters[i]
+// Else if no match after looping through it, return letters [0]  
+// But we know that this may not be efficient esp with larger data sets. Would you want to open 10,000 drawers to find your socks?  
+--> if letters[i] > target --> return letters[i]  
 
 ```
 class Solution {
@@ -63,27 +64,34 @@ class Solution {
 
 ## Further Rumination 
 // Yes, yes it's binary search time again. Notice how Leetcode tells us the array is sorted. 
-So... ok I admit my n00b self got stuck on this here. It was my 3rd Leetcode problem ever and well my wizard in shining armor gave me an idea to defeat this quagmire that Lord Leetcode had me trapped in.
+So... ok I admit my n00b self got stuck on this here. It was my 3rd Leetcode problem ever and well my wizard mentor in shining armor gave me an idea to defeat this quagmire that Lord Leetcode had me trapped in.
 
 // We can use a closestSoFar to track our potential candidate for the smallest letter greater than the target.
 // `[ a, g, i, o, u] and b is our target`
-// Middle is 2 (letter i), target < middle so we do right - 1 
-// Now, we are looking at `left: 0` and `right: 1`
+1. 1st iteration:  `middle` is 2 (letter i), `middle` > `target` so the middle could be a potential
+We update closestsoFar to middle. Just like imagine how some women want the first guy over 6 ft. So any guy over 6 ft could be a potential. 
+--> if letters [middle] > target { closestsoFar = letters [middle]}
+
+2. 2nd iteration: Because `middle` was > `target`, then we should search the lower half. We don't want a guy thats too tall, am I right ladies? 
+So now, we are looking at `left: 0` and `right: 1`
 // The middle is 0 and that is the letter a. If a was our target, the next letter would be g
+Or with dating analogy, if the guy in the middle exactly was 6 ft, then our next guy in line would be our dream guy.   
 --> if letters [middle] == target { return letters [middle + 1]}
 
-// but our target is b... and middle is less than b currently so increase the left by 1
-// Now, we are at `left: 1` and `right: 1`. The middle is 1 which is g which is greater than the target, so our answer would be g, or index of 1. Also, since middle > target, right would update to `right: 0`
+3. ... but our target is b... and middle is less than b currently so increase the left by 1
+// Now, we are at `left: 1` and `right: 1`. The `middle` is 1 which is g which is greater than the target, so our answer would be g, or index of 1. Also, since `middle` > `target`, right would update to `right: 0` which would exit our loop.  
+Back to dating analogy: when left = right, then we are staring at our last guy. And if he is taller than our target of 6 ft, then thats our guy.
 
-Again 
--->
-So if the target is z OR if the target is not found we return letters[0].
+
+
 
 ---
 # Java
 
-
 ## Binary Search 
+
+### Attempt 1 
+So I attempted to put all of that in code
 
 ```
 class Solution {
@@ -94,26 +102,97 @@ class Solution {
 
         while (left <= right) {
             int middle = left + (right - left) / 2;
-
-            if (letters[middle] <= target) {
-                closestSoFar = letters[middle]; // Update closestSoFar if current letter is <= target
+            if (letters[middle] < target) {
                 left = middle + 1;
-            } else if (letters[middle] > target) {
-                closestSoFar = letters[middle]; // Update closestSoFar with current letter
+        
+            } 
+            else if (letters[middle] == target) {
+                closestSoFar = letters[middle + 1];
+                return closestSoFar;
+            }
+            
+            else if (letters[middle] > target) {
+                closestSoFar = letters[middle]; // potential candidate 
                 right = middle - 1;
             }
         }
 
-        // After exiting the loop, 'left' is the insertion point
-        if (left >= letters.length) {
-            return letters[0]; // Wrap around to the first letter
+        // After exiting the loop, 
+        if (left == right) {
+            return closestSoFar;
         } else {
-            return letters[left];
+            return letters[0];
         }
     }
 }
+```
+3 test casees passed, then one failed.
+`["c","f","j"] with target of d`. Mine output c, whereas it was expected to output f.
 
+So mine is saying: 
+1. 1st iteration: closestSoFar= c, middle = f, target = d; middle > target  
+--> closestSoFar = middle
+left= 0, new right= 1
+2. 2nd iteration: closestSoFar= middle   
+--> new middle is 0 (c), middle < target so:
+new left = 1, new right = 1
+
+
+3. 3rd iteration: middle = 1; middle > target: closestSoFar = middle, and right is updated to 0
+
+4. ... and I oop! Now loop is exited but right is not equal to left so it goes to the second else and we get the letters[0]
+
+### Attempt 2
+Now we cookin`! 
+This second attempt removes my n00by if/else statement and instead uses a ternary to check if closestSoFar > target and if so return closestSoFar. Remember we initlaize with value of letters[0]. Otherwise, if whatever value of closestSoFar is less than the target, we'll just stick with letters[0].
+
+Dating analogy- if Ms. Betsy doesn't find the first guy over 6 ft, she'll just stick with her current guy who is first in line. 
+
+```
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        int left = 0;
+        int right = letters.length - 1;
+        char closestSoFar = letters[0];
+
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            if (letters[middle] <= target) {
+                left = middle + 1;
+
+            }
+
+            else if (letters[middle] > target) {
+                closestSoFar = letters[middle]; // potential candidate
+                right = middle - 1;
+            }
+        }
+
+        // After exiting the loop,
+        // If no character greater than target is found, return the first character
+        return closestSoFar > target ? closestSoFar : letters[0];
+    }
+}
 ```
 
 ---
 # Javascript
+const nextGreatestLetter = (letters, target) => {
+    let left = 0;
+    let right = letters.length - 1;
+    let closestSoFar = letters[0];
+
+    while (left <= right) {
+        let middle = Math.floor(left + (right - left) / 2);
+        if (letters[middle] <= target) {
+            left = middle + 1;
+        } else {
+            closestSoFar = letters[middle]; // potential candidate
+            right = middle - 1;
+        }
+    }
+
+    // After exiting the loop,
+    // If no character greater than target is found, return the first character
+    return closestSoFar > target ? closestSoFar : letters[0];
+};

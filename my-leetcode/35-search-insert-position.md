@@ -7,9 +7,9 @@
 # Problem 
 
 
-Link: https://leetcode.com/problems/search-insert-position/description/
+**Link:** https://leetcode.com/problems/search-insert-position/description/
 
-Problem Text: 
+**Problem Text:** 
 Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
 
@@ -30,16 +30,16 @@ Output: 4
 
 # Scratch Pad/ Pseudocode
 
-// Let's try the simple way first. The good ol' loop de loop.
-// So [1, 3, 5, 6, 7] and we are looking for 2.
-// If we were to have to have found it, we'd return the index where it was found
-// But.... is 1 = 2, no --> So 3 = 2, no
-// assuming we loop through it, and we don't find the number, then we got to figure out where do we want to insert the number.
-// But wait, we would want to insert it after 1. 
-// So let's do is 1 <=2? - yeah- so insert it after 1.
-// Ok, so this means we insert it at index 1- which is the number 3, and 3 is what?
-// 3 is greater than the target mmm...
-// which means .. if `nums[i]` == target or if it's `>` like in our example above... then we log `i`.
+// Let's try the simple way first. The good ol' loop de loop.  
+// So [1, 3, 5, 6, 7] and we are looking for 2.  
+// If we were to have to have found it, we'd return the index where it was found  
+// But.... is 1 = 2, no --> So 3 = 2, no  
+// assuming we loop through it, and we don't find the number, then we got to figure out where do we want to insert the number.  
+// But wait, we would want to insert it after 1.   
+// So let's do is 1 <=2? - yeah- so insert it after 1.  
+// Ok, so this means we insert it at index 1- which is the number 3, and 3 is what?  
+// 3 is greater than the target mmm...  
+// which means .. if `nums[i]` == target or if it's `>` like in our example above... then we log `i`.  
 
 
 ## Initial Solution
