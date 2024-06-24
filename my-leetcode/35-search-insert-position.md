@@ -13,17 +13,17 @@
 Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
 
-Example 1:
-Input: nums = [1,3,5,6], target = 5
-Output: 2
+Example 1:  
+Input: nums = [1,3,5,6], target = 5  
+Output: 2  
 
-Example 2:
-Input: nums = [1,3,5,6], target = 2
-Output: 1
+Example 2:  
+Input: nums = [1,3,5,6], target = 2  
+Output: 1  
 
-Example 3:
-Input: nums = [1,3,5,6], target = 7
-Output: 4
+Example 3:  
+Input: nums = [1,3,5,6], target = 7  
+Output: 4  
 
 
 ---
@@ -97,18 +97,18 @@ But... what if we don't find the number.
 Let's walk through this example.
 `Input: nums = [1,3,5,6], target = 7`
 
-1. Ok, so we start at index 1 which is the `middle`.
-The number is 3, and 3 is less than 7. We got to go higher up.
-`left` becomes index 2 and `right` is still index 3.
+1. Ok, so we start at index 1 which is the `middle`.  
+The number is 3, and 3 is less than 7. We got to go higher up.  
+`left` becomes index 2 and `right` is still index 3.    
 
-2. Now, we are at index 2 for the `middle`. 
-The number if 5, and 5 is less than 7...
-`left` becomes index 3 and `right` is still index 3.
+2. Now, we are at index 2 for the `middle`.   
+The number if 5, and 5 is less than 7...  
+`left` becomes index 3 and `right` is still index 3.  
 
 
-3. Our `middle` is index 3, which is 6 which is less than 7. That means we increase the left by 1, so it becomes index 4. 
+3. Our `middle` is index 3, which is 6 which is less than 7. That means we increase the left by 1, so it becomes index 4.  
 
-4. Hold up! So our `left` and `right` were equal in step 2 and 3. So we can't go any further right? That's because the while loop is only for when `left <= right`. So.. we return `left` or index 4. 
+4. Hold up! So our `left` and `right` were equal in step 2 and 3. So we can't go any further right? That's because the while loop is only for when `left <= right`. So.. we return `left` or index 4.   
 
 
 ---

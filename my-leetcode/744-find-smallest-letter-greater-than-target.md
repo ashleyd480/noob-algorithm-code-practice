@@ -12,20 +12,20 @@ You are given an array of characters letters that is sorted in non-decreasing or
 Return the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.
 
 
-Example 1:
-Input: letters = ["c","f","j"], target = "a"
-Output: "c"
-Explanation: The smallest character that is lexicographically greater than 'a' in letters is 'c'.
+Example 1:  
+Input: letters = ["c","f","j"], target = "a"  
+Output: "c"  
+Explanation: The smallest character that is lexicographically greater than 'a' in letters is 'c'.  
 
-Example 2:
-Input: letters = ["c","f","j"], target = "c"
-Output: "f"
-Explanation: The smallest character that is lexicographically greater than 'c' in letters is 'f'.
+Example 2:  
+Input: letters = ["c","f","j"], target = "c"  
+Output: "f"  
+Explanation: The smallest character that is lexicographically greater than 'c' in letters is 'f'.  
 
 Example 3:
-Input: letters = ["x","x","y","y"], target = "z"
-Output: "x"
-Explanation: There are no characters in letters that is lexicographically greater than 'z' so we return letters[0].
+Input: letters = ["x","x","y","y"], target = "z"  
+Output: "x"  
+Explanation: There are no characters in letters that is lexicographically greater than 'z' so we return letters[0].  
 
 
 ---
@@ -63,24 +63,25 @@ class Solution {
 
 
 ## Further Rumination 
-// Yes, yes it's binary search time again. Notice how Leetcode tells us the array is sorted. 
-So... ok I admit my n00b self got stuck on this here. It was my 3rd Leetcode problem ever and well my wizard mentor in shining armor gave me an idea to defeat this quagmire that Lord Leetcode had me trapped in.
+// Yes, yes it's binary search time again. Notice how Leetcode tells us the array is sorted.     
+So... ok I admit my n00b self got stuck on this here. It was my 3rd Leetcode problem ever and well my wizard mentor in shining armor gave me an idea to defeat this quagmire that Lord Leetcode had me trapped in.    
 
-// We can use a closestSoFar to track our potential candidate for the smallest letter greater than the target.
-// `[ a, g, i, o, u] and b is our target`
+// We can use a closestSoFar to track our potential candidate for the smallest letter greater than the target.    
+// `[ a, g, i, o, u] and b is our target`  
+  
 1. 1st iteration:  `middle` is 2 (letter i), `middle` > `target` so the middle could be a potential
 We update closestsoFar to middle. Just like imagine how some women want the first guy over 6 ft. So any guy over 6 ft could be a potential. 
 --> if letters [middle] > target { closestsoFar = letters [middle]}
 
 2. 2nd iteration: Because `middle` was > `target`, then we should search the lower half. We don't want a guy thats too tall, am I right ladies? 
 So now, we are looking at `left: 0` and `right: 1`
-// The middle is 0 and that is the letter a. If a was our target, the next letter would be g
-Or with dating analogy, if the guy in the middle exactly was 6 ft, then our next guy in line would be our dream guy.   
---> if letters [middle] == target { return letters [middle + 1]}
+// The middle is 0 and that is the letter a. If a was our target, the next letter would be g.  
+Or with dating analogy, if the guy in the middle exactly was 6 ft, then our next guy in line would be our dream guy.     
+--> if letters [middle] == target { return letters [middle + 1]}  
 
-3. ... but our target is b... and middle is less than b currently so increase the left by 1
+3. ... but our target is b... and middle is less than b currently so increase the left by 1   
 // Now, we are at `left: 1` and `right: 1`. The `middle` is 1 which is g which is greater than the target, so our answer would be g, or index of 1. Also, since `middle` > `target`, right would update to `right: 0` which would exit our loop.  
-Back to dating analogy: when left = right, then we are staring at our last guy. And if he is taller than our target of 6 ft, then thats our guy.
+Back to dating analogy: when left = right, then we are staring at our last guy. And if he is taller than our target of 6 ft, then thats our guy.  
 
 
 
