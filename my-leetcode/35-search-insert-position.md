@@ -7,10 +7,10 @@
 # Problem 
 
 
-**Link:** https://leetcode.com/problems/search-insert-position/description/
+**Link:** https://leetcode.com/problems/search-insert-position/description/  
 
-**Problem Text:** 
-Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+**Problem Text:**   
+Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.  
 
 
 Example 1:  
@@ -71,6 +71,7 @@ For example- `nums = [1,3,5,6], target = 7` - the output was 4. You knew none of
 Our friend Binary Search is back. Remember we can use binary search because hint Leetcode says it's a sorted array. 
 Yay- we love neat freaks that sort everything out so it makes stuff easier to find. 
 
+```
 class Solution {
     public int searchInsert(int[] nums, int target) {
         int left = 0;
@@ -90,8 +91,9 @@ class Solution {
     return left;
     }
 }
+```
 
-The first chunk of code is the standard code for a general binary search. If the middle is less than the target, search the upper half and vice versa. You may refer to my detailed explanation [here] (https://github.com/ashleyd480/noob-algorithm-code-practice/blob/master/my-leetcode/704-binary-search.md).
+The first chunk of code is the standard code for a general binary search. If the middle is less than the target, search the upper half and vice versa. You may refer to my detailed explanation [here](https://github.com/ashleyd480/noob-algorithm-code-practice/blob/master/my-leetcode/704-binary-search.md).
 
 But... what if we don't find the number. 
 Let's walk through this example.

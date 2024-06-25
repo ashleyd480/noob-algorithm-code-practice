@@ -43,7 +43,7 @@ So if the target is z OR if no letter is gretater than target, we return letters
 ## Initial Approach
 // Let's start with a simple loop. `["c","f","j"], target = "a"`    
 // So is c > a? Yes, then we exit the loop.   
-// So as we iterate- as soon as letters[i] > target --> return letters[i] and we break out the loop
+// So as we iterate- as soon as letters[i] > target --> return letters[i] and we break out the loop  
 // Else if no match after looping through it, return letters [0]  
 // But we know that this may not be efficient esp with larger data sets. Would you want to open 10,000 drawers to find your socks?  
 --> if letters[i] > target --> return letters[i]  
@@ -68,7 +68,7 @@ So... ok I admit my n00b self got stuck on this here. It was my 3rd Leetcode pro
 
 // We can use a closestSoFar to track our potential candidate for the smallest letter greater than the target.    
 // `[ a, g, i, o, u] and b is our target`  
-  
+
 1. 1st iteration:  `middle` is 2 (letter i), `middle` > `target` so the middle could be a potential
 We update closestsoFar to middle. Just like imagine how some women want the first guy over 6 ft. So any guy over 6 ft could be a potential. 
 --> if letters [middle] > target { closestsoFar = letters [middle]}
@@ -145,7 +145,7 @@ new left = 1, new right = 1
 
 ### Attempt 2
 Now we cookin`! 
-This second attempt removes my n00by if/else statement and instead uses a ternary to check if closestSoFar > target and if so return closestSoFar. Remember we initlaize with value of letters[0]. Otherwise, if whatever value of closestSoFar is less than the target, we'll just stick with letters[0].
+This second attempt removes my n00by if/else statement and instead uses a ternary to check if closestSoFar > target and if so returns closestSoFar. Remember we initlaize with value of letters[0]. Otherwise, if whatever value of closestSoFar is less than the target, we'll just stick with letters[0].
 
 Dating analogy- if Ms. Betsy doesn't find the first guy over 6 ft, she'll just stick with her current guy who is first in line. 
 

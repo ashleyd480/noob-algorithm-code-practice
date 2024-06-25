@@ -4,8 +4,8 @@
 
 # Problem
 
-Link: https://leetcode.com/problems/binary-search/
-Problem Text:
+**Link:** https://leetcode.com/problems/binary-search/  
+**Problem Text:**    
 Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
 
 Example 1:  
