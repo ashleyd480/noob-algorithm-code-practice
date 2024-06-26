@@ -159,7 +159,7 @@ In our code, we started by initializing a list of `Person` objects: `new ArrayLi
 Then we iterate through it and call `.add` to add a new `Person` instance that has the attribute of that index value we are iteratng over in names and heights array. 
 Note: we used a List because you can stuff to a List in Java, vs arrays are immutable. 
 
-Then, we use `Collections.sort` to sort:  
+Then, we use `Collections.sort` to sort by the height attribute with dot notation.
 ```
 Collections.sort(people, (a, b) -> b.height - a.height);
 ```
