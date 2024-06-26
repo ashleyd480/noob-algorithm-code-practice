@@ -28,7 +28,7 @@ Explanation: The first Bob is the tallest, followed by Alice and the second Bob.
 # Scratch Pad/ Pseudocode
 
 // My first thought is there has to be some way to combine the key value pairs of height and the name, so they're associated with each other.   
-//
+//... thoughts continued below in initial solution...
 
 
 ## Initial Solution
@@ -56,11 +56,9 @@ Hashmaps are just a way to tie a value to a key, like imagine people at a dance-
 Technically though we would make a list of heights, sort through that, and then since heights are already tied to the names with hashmap's key-value feature, then we could just tie the names back. 
 
 ## Edge Case(s)
-Just realized this after a test case failed that an edge case can be duplicate heights...
+I was going to say duplicate heights could be an edge case but then I see the constraints say the heights are distinct. 
 
 --- 
-
----
 
 # Java Solution
 
@@ -159,6 +157,8 @@ class Solution {
 
 In our code, we started by initializing a list of `Person` objects: `new ArrayList<>`
 Then we iterate through it and call `.add` to add a new `Person` instance that has the attribute of that index value we are iteratng over in names and heights array. 
+Note: we used a List because you can stuff to a List in Java, vs arrays are immutable. 
+
 Then, we use `Collections.sort` to sort:  
 ```
 Collections.sort(people, (a, b) -> b.height - a.height);
@@ -178,4 +178,31 @@ sortedNames[i] = people.get(i).name;
 ---
 
 # Javascript Solution
+```
+  const sortPeople = (names, heights) => {
+        // Step 1: Create an array of Person objects
+        let people = [];
+        for (let i = 0; i < names.length; i++) {
+            people.push({ name: names[i], height: heights[i] });
+        }
 
+        // Step 2: Sort the array of Person objects based on height in descending order
+        people.sort((a, b) => b.height - a.height);
+
+        // Step 3: Extract the sorted names into an array
+        let sortedNames = people.map(person => person.name);
+
+        return sortedNames;
+    }
+```
+
+With Javascript, we can initialize an array of `Person` objects, as arrays are mutable in Javascript and we can call `.add` to add the `Person` objects.  
+We can directly add the `Person` object "instances" as object key-value pairs:
+
+```
+people.push({ name: names[i], height: heights[i] });
+```
+
+Then, we sort the array with `.sort` and then the comparator of `b.height- a.height`. 
+
+Finally, we use `.map` to make a copy of our `people` array so we can "transform" it to just get the names. 
