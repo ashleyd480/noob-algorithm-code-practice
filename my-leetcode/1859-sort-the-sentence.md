@@ -46,6 +46,10 @@ Here's a general pseudocode:
             words.add(new Word characters[i], numbers[i]));
         }
 
+[word2, word1, word3]
+as we add a word- it will have its respective characters and numbers attribute
+so we would iterate through the sentence and for each word like word2, we would break that into its characters and number - we would have 2 arrays- one for the characters and one for the number
+
     // Step 2: Sort the list of Word objects based on word number
     Collections.sort(people,(a,b)->a.number-b.number);
 
