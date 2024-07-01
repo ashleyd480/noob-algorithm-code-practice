@@ -4,6 +4,10 @@
 ---
 # Problem 
 
+
+## Tags: 
+#binary-search, #ternary
+
 **Link:** https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/
 
 **Problem Text:** 

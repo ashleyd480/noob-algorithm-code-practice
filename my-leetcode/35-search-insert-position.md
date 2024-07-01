@@ -6,6 +6,8 @@
 
 # Problem 
 
+## Tags: 
+#binary-search, #sorted-array
 
 **Link:** https://leetcode.com/problems/search-insert-position/description/  
 

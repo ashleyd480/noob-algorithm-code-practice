@@ -3,7 +3,12 @@
 
 # Problem
 
+## Tags: 
+#sorting, #hashmap, #collections-sort, #object-class, #constructor, #java-new-array 
+
+
 **Link:** https://leetcode.com/problems/sort-the-people/description/    
+
 **Problem Text:**    
 You are given an array of strings names, and an array heights that consists of distinct positive integers. Both arrays are of length n.  
 
