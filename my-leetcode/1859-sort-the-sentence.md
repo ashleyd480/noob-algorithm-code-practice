@@ -32,10 +32,10 @@ Explanation: Sort the words in s to their original positions "Me1 Myself2 and3 I
 
 # Scratch Pad/ Pseudocode
 
-// So each word's last char is the index position
-// and the word is everything up to last character
-// so we can create a new array list and we can make a new word class
-// we can add the words and the word's index position (last char) as key-value pairs;
+// So each word's last char is the index position  
+// and the word is everything up to last character  
+// so we can create a new array list and we can make a new word class  
+// we can add the words and the word's index position (last char) as key-value pairs;  
 
 
 
@@ -56,7 +56,7 @@ as we add a word- it will have its respective characters and numbers attribute
 so we would iterate through the sentence and for each word like word2, we would break that into its characters and number - we would have 2 arrays- one for the characters and one for the number
 
     // Step 2: Sort the list of Word objects based on word number
-    Collections.sort(people,(a,b)->a.number-b.number);
+    Collections.sort(word,(a,b)->a.number-b.number);
 
     // Step 3: Remove the words last character- for each word by calling trim last
     // character
