@@ -4,7 +4,7 @@
 # Problem
 
 ## Tags:
-#sorting, #hashmap, #collections-sort
+#sorting, #hashmap, #collections-sort, #substring, #split, #parseInt
 
 
 **Link:** https://leetcode.com/problems/sorting-the-sentence/
@@ -84,10 +84,52 @@ I was going to say maybe extra spaces in front of word are edge case, but Leetco
 # Java Solution
 
 ## Attempt 1: 
+We worked on this in one of our mentor's office hours. Ty Leo for helping me whiteboard and code this out together with you during your office hour!
 
+```
+class Solution {
+    public String sortSentence(String s) {
+        // break apart by white spaces to make collection of strings
 
+        String[] words = s.split("\\s+");
+        System.out.println("I have parsed the " + words.length);
+        // last character to seperate the number from word
 
----
+        String[] mySentenceArray = new String[words.length];
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            String wordPart = word.substring(0, word.length() - 1);
+            String numberPart = word.substring(word.length() - 1, word.length());
+            Integer numberPartInteger = Integer.parseInt(numberPart);
+            System.out.println("This is a wordpart " + wordPart);
+            System.out.println("This is a numberpart " + numberPart);
+            mySentenceArray[numberPartInteger - 1] = wordPart;
+        }
+        String completedSentence = "";
+        for (int i = 0; i < mySentenceArray.length; i++) {
+            if (i < mySentenceArray.length - 1) { // looking to see if not last word 
+                completedSentence += mySentenceArray[i] + " ";
+            } else { // this is the word 
+                completedSentence += mySentenceArray[i];
+            }
+        }
+        return completedSentence;
+    }
+}
+```
 
-# Javascript Solution
+While solving this, we learned from Leo how to use Google and specficially StackOverflow and Baeldung to research syntax. 
+We also used some s.out statements to compile code as we went along to ensure the code compiles, and that our code is correctly producing the right output. This allows us to find the error sooner than later, and this also helps make the error easier to identify since we would have less lines of code to debug.
+For example, we did s.out to check the wordPart and numberPart were correctly splicing with `substring`. 
+
+I learned that for the `substring` method: when you specify word.substring(startIndex, endIndex), it will extract characters starting from startIndex up to (but not including) endIndex. Also, I realized after submitting my solution above-- that the reason I had to use `parseInt` was because I declared my `numberPart` as a type `String`. Had I just declared it as an Intger, it would not have been an issue. 
+
+Another thing we learned in this exercise is initializing variables. In this case, we initalized a variable to represent the array to hold the sorted sentence outside of the for loop. This way, as we iterate through, we could assign each `wordPart` to its respective index in that sorted sentence array. That index is represented as `numberPartInteger-1` because the numbers start with `1` in the sentence. (By the way, we found that fix out when we got an out of bounds index error when we tried to compiled our code).
+
+Then, we wrote that sorted setnence array back to a sentence by using string concatentation. 
+That is we did ` completedSentence += mySentenceArray[i] + " ";`. 
+Written out that is: `completedSentence = completedSentence + " " + mySentenceArray[i];`.
+
+We noticed a space after the last word in a failed test case. Subsequently, I used an if/else statement that would only add a space if we were not at the last word.
+
 

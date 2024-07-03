@@ -102,12 +102,13 @@ class Solution {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> theMap = new HashMap(); // initialize new hashamp
 
-        for (int i = 0; i < nums.length; i++) {
-            theMap.put(nums[i], i); // iterate through array and write the number and index as key-value
-        }
+
         for (int i = 0; i < nums.length; i++) {
             int currentValue = nums[i];
             int needsValue = target - currentValue; // number we searching for to get to target
+
+            theMap.put(currentValue, i);     // iterate through array and write the number and index as key-value
+
             if (theMap.containsKey(needsValue)) {
                 int[] output = new int[2]; // initialize new array to hold the 2 nums that sum up
                 output[0] = theMap.get(needsValue); // we can call .get to get value (index) associated with key 
@@ -117,7 +118,8 @@ class Solution {
                 }
             }
         }
-        return null;
+        return null; // if no such pair is found, return null
+
     }
 
 }
@@ -127,7 +129,7 @@ class Solution {
 1. We intializes a new HashMap() that contains key-value pairs of type integer, integer.   
 2. Then, we iterate through the array of numbers and write each number and its respective position as key-value pairs.
 So why make the number as the key? Well, because we want to ensure that whatever we're looking for is the key. If we're looking for a missing sock, that would be our key.. and in this case- we're looking for the number- that would be our key! The number's index posiiton is the value.
-3. Now that we are done with that first iteration which wrote the array data to a hashmap, then we we iterate through the array again. As we iterate through, the number we are on is called `currentValue`. the `needsValue` is the number we are finding that should be paired with `currentValue` in order to sum up to the `target`. 
+3. As we iterate through, the number we are on is called `currentValue`. the `needsValue` is the number we are finding that should be paired with `currentValue` in order to sum up to the `target`. 
 4. If that `needsValue` key is found, then we initialize an array to hold the `currentValue` and the `needsValue`. However, Leo showed us how when he ran it- a test case failed and it was because `currentValue` was equal to `needsValue` and we are not able to use the same element- hence we added a conditional check that the outputs don't match- and if so then we can return that output array. 
 
 
