@@ -134,7 +134,7 @@ So why make the number as the key? Well, because we want to ensure that whatever
 
 
 ### Time Complexity
-We iterate twice through the array as you can see in step 2 and 3 above. This means we iterate n + n times. 
+We iterate once through the array as you can see in step 2 and 3 above. This means we iterate n times. 
 This is more efficient than the nested for loop, due to the hashmap - in the second iteration- we can use the .containsKey which allows us to quickly check if a key (`needsValue`) exists without having to check each number. 
 
 
