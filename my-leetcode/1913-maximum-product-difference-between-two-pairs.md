@@ -6,7 +6,7 @@
 # Problem 
 
 ## Tags: 
-#sort, #stream-api, #priority-queue, #max-heap
+#sort, #stream-api, #priority-queue, #max-heap, #initialization-point
 
 **Link:** https://leetcode.com/problems/maximum-product-difference-between-two-pairs/description/
 
@@ -169,32 +169,32 @@ We check if the 4 is less than the current min of 2, which it's not so we don't 
 If `nextMin` < num then let's update `nextMin` to num. 
 We should also then do that for nextMax too - checking if nextMax > num.  
 
-Note: After looking at this, in the for loop- I could have broken that into two if/else statements- one to check for max and nextMax, and the other for min and nextMin to help the code stay clean.
+Note: After looking at this, in the for loop (in my other solutions), I should have used two if/else statements- one to check for max and nextMax, and the other for min and nextMin to help the code stay clean. You can see this was fixed below.
+Also note the extra else statements which fix how we update the `nextMin` and `nextMax`
 
 ```
 class Solution {
     public int maxProductDifference(int[] nums) {
-        int min = nums[0];
         int max = nums[0];
-        int nextMin = nums[0];
         int nextMax = nums[0];
+        int min = nums[0];
+        int nextMin = nums[0];
 
         for (int num : nums) {
 
             if (num > max) {
-                nextMax = max;
-                max = num;
+                nextMax = max; // we have a new max, so nextMax becomes the current value of max
+                max = num; // max becomes the new large num
             } else if (num > nextMax) {
-                nextMax = num;
-            } else if (num < min) {
+                nextMax = num; // if num is < max and this num > nextMax, then we should update our nextMax
+            } 
+            
+            if (num < min) {
                 nextMin = min;
                 min = num;
             } else if (num < nextMin) {
                 nextMin = num;
             }
-
-            System.out.println("max is " + max + " and nextMax is " + nextMax + " and min is " + min
-                    + " and nextMin is " + nextMin);
 
         }
 
@@ -205,21 +205,62 @@ class Solution {
 }
 ```
 
-Ok, so that resolved the case of updating `nextMax` and `nextMin` but now we had another failed test where it read the min as 1, and then the nextMin as 1.  
+## Attempt 5
 
-Example below:  
+Ok, so that resolved the case of updating nextMax and nextMin but now we had another failed test where it read the min as 1, and then the nextMin as 1.
+
+Example below:
 array: [1,6,7,5,2,4,10,6,4]
 
- 
-max is 6 and nextMax is 1 and min is 1 and nextMin is 1 - 2nd iteration 
-max is 7 and nextMax is 6 and min is 1 and nextMin is 1 - 3rd iteration
+num is 1 max is 1 and nextMax is 1 and min is 1 and nextMin is 1
+num is 6 max is 6 and nextMax is 1 and min is 1 and nextMin is 1
+...
+num is 2 max is 7 and nextMax is 6 and min is 1 and nextMin is 1
 
-When we reached the number 2, that should have updated `nextMin` but it didn't because num was not less than current value of `nextMin` which was 1. Therefore, we could not trigger the `else if (num < nextMin)`. On top of that, another test failed because Mr. Leet slyly decided we can make an array of duplicate values. 
+When we reached the number 2, that should have updated nextMin but it didn't because num was not less than current value of nextMin which was 1. Therefore, we could not trigger the else if (num < nextMin). 
 
-## Attempt 5
+The problem is we can't have nextMin equal to min. If so, in this case min was equal the 0th index, and that number is the actual min. nextMin is also set as the 0th index which means ruh-roh- when we go to check if num < nextMin - which is still the value of that 0th array element, nothing can be less than the min. Hence, the value is not updated.
+
+This means I have to initialize nextMin and nextMax to be value of index positon 1. However, after research, because we used our first two index values to initalize the values of max, nextMax, min, and nextMin-->  we have to start iterating from position 1. 
+
+Key takeaway for myself: "The number of elements used for initialization directly affects where we start our main iteration. If we initialize with n elements, we typically start our main loop from index n."
+
+```
+class Solution {
+    public int maxProductDifference(int[] nums) {
+        int max = nums[0];
+        int nextMax = nums[1];
+        int min = nums[0];
+        int nextMin = nums[1];
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > max) {
+                nextMax = max;
+                max = nums[i];
+            } else if (nums[i] > nextMax) {
+                nextMax = nums[i];
+            }
+
+            if (nums[i] < min) {
+                nextMin = min;
+                min = nums[i];
+            } else if (nums[i] < nextMin) {
+                nextMin = nums[i];
+            }
+           
+        }
+
+        return (max * nextMax) - (min * nextMin);
+    }
+}
+```
+--            
+
+# Alternative Solution
 
 My mentor hinted I look up "priority queue". I looked it up and then I got wizard powers and I lived happily ever after.   
 Just kidding! Still a n00b. >_<  But actually- so here's what I found. 
+
 
 We initlize a priorityQueue called `maxHeap` which sorts the numbers in descending order. 
 `poll()` retrieves and removes the head of the queue (the element with the highest priority in a min heap, or the lowest  in a max heap). In our max heap,  `poll()` removes and returns this largest element and second largest (both at the front of the "line")
@@ -227,7 +268,7 @@ We initlize a priorityQueue called `maxHeap` which sorts the numbers in descendi
 We then initialize another priorityQueue called `minHeap` that has the numbers in default ascending order. 
 `.poll()` retrieves the smallest numbers (also both at the front of that "line").
 
-Note: even though this method sorts, in the context of a PriorityQueue in Java, the sorting process itself (done internally using a binary heap) is optimized to maintain efficient operations. Therefore, the comparator does not put big dent into time complexity in this case. 
+Note: even though this method sorts, in the context of a PriorityQueue in Java, the sorting process itself (done internally using a binary heap) is optimized to maintain efficient operations. Therefore, the comparator does not put big dent into time complexity in this case. And what's nice and more efficient about this method is we can use `maxHeap` and `minHeap` to easily find the two largest and 2 smallest. 
 
 Da code below:
 ```
