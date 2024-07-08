@@ -1,4 +1,4 @@
-2418. Sort the People
+# 2418. Sort the People
 ---
 
 # Problem
