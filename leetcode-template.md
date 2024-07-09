@@ -44,11 +44,6 @@
 
 
 
- 
-
-## Edge Case(s)
-n/a
-
 ---
 
 # Java Solution
