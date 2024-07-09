@@ -6,7 +6,7 @@
 # Problem 
 
 ## Tags: 
-#sort, #stream-api, #priority-queue, #max-heap, #initialization-point
+#sort, #stream-api, #priority-queue, #heap, #initialization-point, #nested-if
 
 **Link:** https://leetcode.com/problems/maximum-product-difference-between-two-pairs/description/
 
@@ -111,10 +111,10 @@ int[] newArray = Arrays.stream(nums)
 ## Attempt 3
 Ok, but you can see how in Attempt 2, I still have to make another pass to find the 2nd max and 2nd min, and my awesome mentor who is like the superest smartest wizard ever was like what if we do that in one pass. I know we looked at the "closestSoFar" idea in another Leetcode problem, so maybe we could track something similar here. I hemmed and hawed, my brain spinning like a dazed washing machine trying to think. Sunday, I mapped it out and got aha moment.
 
-// nums = [5,6,2,7,4]
-// i = 0, max = 5, and num is not greater than 5 or less than, move on
-// i = 1, max = 5, but num is greater - so max= 5 and we update nextMax to the max 
-// ok and then along those lines, if we update the min to num, then nextMin would be the value of min 
+// nums = [5,6,2,7,4]  
+// i = 0, max = 5, and num is not greater than 5 or less than, move on  
+// i = 1, max = 5, but num is greater - so max= 5 and we update nextMax to the max   
+// ok and then along those lines, if we update the min to num, then nextMin would be the value of min   
 
 ```
 class Solution {
@@ -256,7 +256,7 @@ class Solution {
 ```
 --            
 
-# Alternative Solution
+# Alternative Solution: Priority Queue
 
 My mentor hinted I look up "priority queue". I looked it up and then I got wizard powers and I lived happily ever after.   
 Just kidding! Still a n00b. >_<  But actually- so here's what I found. 
@@ -268,8 +268,10 @@ We initlize a priorityQueue called `maxHeap` which sorts the numbers in descendi
 We then initialize another priorityQueue called `minHeap` that has the numbers in default ascending order. 
 `.poll()` retrieves the smallest numbers (also both at the front of that "line").
 
-Note: even though this method sorts, in the context of a PriorityQueue in Java, the sorting process itself (done internally using a binary heap) is optimized to maintain efficient operations. Therefore, the comparator does not put big dent into time complexity in this case. And what's nice and more efficient about this method is we can use `maxHeap` and `minHeap` to easily find the two largest and 2 smallest. 
+Note: even though this method appears to sort, in the context of a PriorityQueue in Java, the sorting process itself (done internally using a binary heap) is optimized to maintain efficient operations. In other words, the efficiency of a priority queue comes from its use of a heap data structure, not from fully sorting the elements. As elements are inserted, then the elements can be sorted to maintain the heap property as determined by the comparator. 
+And what's nice and more efficient about this method is we can use `maxHeap` and `minHeap` to easily find the two largest and 2 smallest. 
 
+## Attempt 1
 Da code below:
 ```
 class Solution {
@@ -298,6 +300,86 @@ class Solution {
         int maxProductDiff = (firstMax * secondMax) - (firstMin * secondMin);
 
         return maxProductDiff;
+    }
+}
+```
+## Attempt 2
+Thanks to my awesome superstar mentor, he pointed out we could make this even more efficient because well Mr. Leet likes it fast and furious. 
+
+Therefore, I thought= hey we can just run through the array of nums once and with each num iteration- add that num to both the maxHeap and the minHeap.
+
+```
+class Solution {
+    public int maxProductDifference(int[] nums) {
+        // Initialize a max heap (priority queue)
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a); // provide comparator to sort descending 
+         PriorityQueue<Integer> minHeap = new PriorityQueue<>(); // this sorts ascending
+
+        // Insert elements into the max heap
+        // Let's just iterate through the nums array once and for each num we use .offer to add to both the maxHeap and Min Heap 
+        for (int num : nums) {
+        maxHeap.offer(num);
+         minHeap.offer(num);
+        }
+
+        // Extract the largest and second largest elements
+        // Extract the smallest and second smallest elements
+       
+
+        int firstMin = minHeap.poll();
+        int secondMin = minHeap.poll();
+
+        int firstMax = maxHeap.poll();
+        int secondMax = maxHeap.poll();
+
+        // Calculate the maximum product difference
+        int maxProductDiff = (firstMax * secondMax) - (firstMin * secondMin);
+
+        return maxProductDiff;
+    }
+}
+```
+
+## Attempt 3
+However, my mentor was like nuh uh- we can make this even speedier. I call him chad-gpt because he is seriously a code optimizing machine. 
+
+So, he gave me a hint that anyways we only need 2 elements in the maxHeap and minHeap respectively. This means I don't have to write each num to those two heaps. 
+
+This is where the nested if statement comes in- while we iterate through the array, we add each num to its respective heap. Then, once we are are over 2, we remove the one from the head. 
+The maxHeap is ordered ascending a-b, so 1, 2, 3. So as soon the 3 is inserted (and the heap does it's magical heap stuff to maintain this ascending order), the 1 gets removed- helping us maintain 2-3 which would be the two max's. Similar logic for the minHeap. 
+
+
+```
+class Solution {
+    public int maxProductDifference(int[] nums) {
+        // limit the size to 2
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> a - b);
+        // Min heap for the two smallest elements
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> b - a);
+
+        for (int num : nums) {
+            //we only need 2 elements in each
+            maxHeap.offer(num);
+            if (maxHeap.size() > 2) {
+                maxHeap.poll(); //and we can do this because maxHeap is sorted ascending so we're removing smaller ones at the head
+
+            }
+
+            // Update minHeap
+            minHeap.offer(num);
+            if (minHeap.size() > 2) {
+                minHeap.poll(); // and we can do this because minHeap is sorted descending so we can remove da  big ones at da head
+            }
+        }
+
+        // Extract the values
+        int max2 = maxHeap.poll();
+        int max1 = maxHeap.poll();
+        int min2 = minHeap.poll();
+        int min1 = minHeap.poll();
+
+        // Calculate and return the maximum product difference
+        return (max1 * max2) - (min1 * min2);
     }
 }
 ```
