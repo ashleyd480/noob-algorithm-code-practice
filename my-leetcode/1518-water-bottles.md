@@ -1,4 +1,4 @@
-# 1518. Water Bottles
+15# 1518. Water Bottles
 
 ---
 
@@ -37,16 +37,16 @@ Number of water bottles you can drink: 15 + 3 + 1 = 19.
 
 # Scratch Pad/ Pseudocode
 
-// numExchange to get the one full water bottle
-// drinking a bottle turns it into empty bottle
-// numBottle is number of bottles you initially have - have to drink all of them
-// to exchange because they have to be empty
-// --> so we divide 9 by 3 in first example
-// numBottle/ numExchange= we get 3 new bottles that we can drink
-// then the 3/ 3 = 1 bottle that we exchange and we one more full one to drink
-// and because 1 < 3 (numExchange) - this means that we can't exchange
-// in the other example 15 bottles divided by 4 it's 3.75 and it appears we
-// round down
+// numExchange to get the one full water bottle 
+// drinking a bottle turns it into empty bottle 
+// numBottle is number of bottles you initially have - have to drink all of them  
+// to exchange because they have to be empty  
+// --> so we divide 9 by 3 in first example  
+// numBottle/ numExchange= we get 3 new bottles that we can drink  
+// then the 3/ 3 = 1 bottle that we exchange and we one more full one to drink  
+// and because 1 < 3 (numExchange) - this means that we can't exchange  
+// in the other example 15 bottles divided by 4 it's 3.75 and it appears we  
+// round down  
 
 
 ---
@@ -73,10 +73,10 @@ class Solution {
             System.out.println(numBottles);
             System.out.println(numNewBottlesFromExchange);
         }
-        // we want to keep dividing those two and getting new value of numBottles until
-        // numBottles < numExchange
-        // we need to keep track of the numBottlesFromExchange - adding on the new value
-        // of numBottlesFromExchange to the new value
+        // we want to keep dividing those two and getting new value of numBottles until  
+        // numBottles < numExchange  
+        // we need to keep track of the numBottlesFromExchange - adding on the new value  
+        // of numBottlesFromExchange to the new value  
 
         return totalDrink;
     }
