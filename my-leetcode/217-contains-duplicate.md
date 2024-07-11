@@ -173,3 +173,27 @@ Reversing the order to the one you see above- that means as we iterate through n
 - We check if that num is contained in the set already- and if so we return true. A return exits the loop. 
 - Otherwise if that num is not contained in the set already- then we add that num to the set. 
 - Else if num not contained in that set after checking through each num- outside of the for loop, we return false. 
+
+## Attempt 4 
+Ok and then I thought and was questioning ChatGPT so if a hashset doesn't allow duplicates by blocking .add if an item already exists, can't we use that built in functionality? 
+
+From my research:
+"If the element is not already in the set, it is added successfully, and add returns true.
+If the element is already present, the HashSet does not allow duplicates, and add returns false."
+
+
+So the below is saying if we aren't able to add the num (aka `seenNumbers.add(num)` is not true ), then return true because that means there's a dupe so we can't add. 
+
+```
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> seenNumbers = new HashSet<>();
+        for (int num : nums) {
+            if (!seenNumbers.add(num)) {
+                return true; // Duplicate found
+            }
+        }
+        return false; // No duplicates found
+    }
+}
+```
