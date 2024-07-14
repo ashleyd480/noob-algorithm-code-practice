@@ -8,7 +8,7 @@
 ## Tags: 
 #stringbuilder
 
-**Link:** https://leetcode.com/problems/palindrome-number/description/
+**Link:** https://leetcode.com/problems/lexicographically-smallest-string-after-a-swap/description/
 
 **Problem Text:**   
 Given a string s containing only digits, return the lexicographically smallest string that can be obtained after swapping adjacent digits in s with the same parity at most once.  
