@@ -162,10 +162,12 @@ class Solution {
     }
 }
 ```
----
+
 
 1. Negative numbers can't be palindromes because of that - symbol. When reversed, it wouldn't be the same, hence that first if statement check.
+
 2. Then, we initialize variables and the value of `original` is the provided number x. This way we can store that value, as `x`'s value change in the subsequent calculations.
+
 3. Now, in the while loop we want to reverse the number. 
  - First iteration
      - Let's say we have 121. The last digit is the remainder of 121 divided by 10. That is 1 (12*10 + 1). ...Or even if we had 5858, the reminder would be 8-- (585*10 + 8)
@@ -179,4 +181,5 @@ class Solution {
     - x becomes 0 This means there are no other numbers to check. If the number is already one digit and we divide it by 10 and cast to `int`, it will equal to 0. *That's why we had that while loop check that x does not equal to 0 or else exit. 
     - reversed becomes 12*10 (we are now on the 10^2 decimal point place) and we add that last digit 1. 
 
-Note: in the 3rd 
+
+4. Finally we can check if that reversed number equals the original. 

@@ -1,0 +1,102 @@
+# 83. Remove Duplicates from Sorted List
+
+---
+
+
+# Problem 
+
+## Tags: 
+#linked-list
+
+**Link:** https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/
+
+**Problem Text:**   
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+ 
+Example 1:  
+Input: head = [1,1,2]  
+Output: [1,2]  
+
+Example 2:  
+Input: head = [1,1,2,3,3]  
+Output: [1,2,3]  
+
+
+
+---
+
+# Scratch Pad/ Pseudocode
+
+// we want to iterate throug the linked list which means using a while loop  
+// checking that next is not null  
+// list is guaranteed to be sorted in ascending order    
+// so it's already sorted so we would just check if the next val is a dupe  
+
+
+## Ask what are the constraints:
+The number of nodes in the list is in the range [0, 300].  
+// ^ this means we can have an empty list so we have to account for that
+
+-100 <= Node.val <= 100  
+The list is guaranteed to be sorted in ascending order.  
+
+## What clarifying questions do I have:
+// looks like we are also passed the head value as the parameter in this Leetcode problem  
+
+
+---
+
+# Java Solution
+
+```
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+       
+    ListNode current = head; // initalize the current node we are on as head
+  // If the list is empty, return null - this is because list size can be 0
+        if (head == null) {
+            return null;
+        }
+
+        while (current. next != null) { // keep iterating up to second to last node 
+            if (current.val == current.next.val) {
+                current.next = current.next.next; // if it's a duplicate we just set the current next value to the next next value
+                                                  
+            } else {
+                current = current.next;
+            }
+        }
+
+        return head; // return modified list starting from head 
+    }
+}
+```
+
+We start off by initializing a ListNote variable called `current` to represent the current node we are on.
+The inital value would be the  `head`. (Most likely outside of this function, `head` is defined by something like this: ` ListNode head = new ListNode(1);`- where its value is 1.)
+
+We keep iterating until we get to the last node. When get to the last node, there is nothing to the right of it so its `current.next= null` so we want to iterate up until the point that `current.next` does not equal to null. We want to do that because we need to compare two values to see if there is a duplicate!  
+
+We are comparing the  `current.val` and the `current.next.val` (next value). If they are equal, then it's a duplicate pair. In that case, we want to set the next value value to the subsequent value (`current.next.next`)
+
+If it's not a duplicate pair, then we can set the `current` to point to the next node. Let's say we have [1, 2, 3, 4] and we are currently on 2 and we check the next number 3. They're not a duplicate- we move our pointer to the next node. 
+
+Finally, to return our modified list (or also in the case where there's only one element in the linked list) - we return `head`. In a linked list, when we return the `head` node (in this case `head` was that variable we got from the function parameter)- then this return the head and the rest of the linked list. This is because in a linked list- each node has a pointer that references the next node. 
+(From ChatGPT: "when you return head from a method that operates on a linked list, you're leveraging the fact that each ListNode in the list has a next attribute. This attribute allows you to traverse through the list starting from head and access each subsequent node until you reach the end (where next is null)")
+
+## Time Complexity 
+The time complexity is linear which means that as the amount of nodes grow, it proportionally takes longer. However, this is more efficient than initializing an array and comparing each element and swapping.
+
+We prefer linked list here because linked list are better for insertions and deletions; whereas with array- inserting or deleting elements requires shifting elements.
+
