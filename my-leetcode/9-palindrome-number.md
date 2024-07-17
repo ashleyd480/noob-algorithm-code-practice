@@ -166,20 +166,23 @@ class Solution {
 
 1. Negative numbers can't be palindromes because of that - symbol. When reversed, it wouldn't be the same, hence that first if statement check.
 
-2. Then, we initialize variables and the value of `original` is the provided number x. This way we can store that value, as `x`'s value change in the subsequent calculations.
+2. Then, we initialize variables and the value of `original` is the provided number x. This way we can store that value, as `x`'s value change in the subsequent calculations. The same goes for `reversed` (which as you will see in step 2, we are writing back the digits of number in reverse)
 
 3. Now, in the while loop we want to reverse the number. 
  - First iteration
-     - Let's say we have 121. The last digit is the remainder of 121 divided by 10. That is 1 (12*10 + 1). ...Or even if we had 5858, the reminder would be 8-- (585*10 + 8)
+     - Let's say we have 123. The last digit is the remainder of 121 divided by 10. That is 1 (12*10 + 1). ...Or even if we had 5858, the reminder would be 8-- (585*10 + 8)
     - Then, we want to remove the remove that last digit by dividing by 10. You can imagine when we draw this out, we draw an arrow to move up one decimal point to the left so 121 becomes 12.1... Of if we had 808, that would be 80.8 and the `int` type removes the decimal in both cases so we have all the numbers except the last. x is updated to 12.
-    - The reverse of that number would start out with that last digit first- which is 1 for 121. (0*10 + 1) ---> `reversed = 1`
+    - The reverse of that number would start out with that last digit first- which is 1 for 121. (0*10 + 1) ---> `reversed = 3`
  - Second iteraton
     - The next iteration, we have `x=12`.  `digit` gets updated to 2. And then x = 1. 
-    - reversed would now be (1*10 +2) = 12 (we multiply by 10 to set the "10^1" decimal point value's digit-- so that decimal point number is 1- and the 2 is added)
+    - reversed would now be (1*10 +2) = 32 (we multiply by 10 to set the "10^1" decimal point value's digit-- so that decimal point number is 1- and the 2 is added) -->  `reversed = 32`.
 - Third iteration
     - Then, we have `x=1` and digit becomes 1 with integer division. 
-    - x becomes 0 This means there are no other numbers to check. If the number is already one digit and we divide it by 10 and cast to `int`, it will equal to 0. *That's why we had that while loop check that x does not equal to 0 or else exit. 
-    - reversed becomes 12*10 (we are now on the 10^2 decimal point place) and we add that last digit 1. 
+    - x becomes 0: This means there are no other numbers to check. If the number is already one digit and we divide it by 10 and cast to `int`, it will equal to 0. This also means there would be no other last number to remove.  *That's why we had that while loop check that x does not equal to 0 or else exit. 
+    - reversed becomes 12*10 (we are now on the 10^2 decimal point place) and we add that last digit 1 --> so `reversed = 321`
+
+tl;dr for Step 3: With each iteration, the last number is taken out by the remainder of dividing by 10.  The number without the the last number becomes the new x. This is how then in the next iteration, we can remove the following next last number from the new x. 
+With each iteration, the next digit is added at the end of reversed. Also, with each iteration- another way to think of it... `reversed` increases by one numerical place, so say we have 3 digits - the first iteration- we'd have a 1-digit long `reversed`. Second iteration, it's a single-digit `reversed`  multipled by 10 so we have a 2 digit-long `reversed`. `reversed` becomes 2 digits long- so 2 digits multiplied by 10 means that `reversed` is now 3 numerical digit places long. 
 
 
 4. Finally we can check if that reversed number equals the original. 
