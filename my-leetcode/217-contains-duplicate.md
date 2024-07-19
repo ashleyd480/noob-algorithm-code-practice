@@ -108,6 +108,7 @@ Hence, I have to put `i < nums.length -1`
 // with a key of the number (which is the one we want to search) - and then value is count
 // if the number is seen- we increment its count 
 // then we can iterate through the hashmap and see if any keys has a value >=2 and if so we return true, which exits the loop
+
 ```
 class Solution {
     public boolean containsDuplicate(int[] nums) {
