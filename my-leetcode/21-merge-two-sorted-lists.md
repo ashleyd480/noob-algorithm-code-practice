@@ -124,7 +124,7 @@ Then we want to also have a variable to represent the current "node" of the "mer
 `ListNode mergedListCurrentNode = mergedListResultDummyStart;`
 
 3. Now that are our variables are initialized, we want to make the check for empty lists. Keep in mind if a list is empty, its head is null. 
-Therefore, we write: `if (list1 == null)` and ditto for list2, then we would return the other list. For example, by returning `list2`- this would return `list2` (its head) and since each node has a built in reference to the next list, this would mean it would render the whole linked list. 
+Therefore, we write: `if (list1 == null)` and ditto for list2, then we would return the other list. For example, by returning `list2`- this would return `list2` (its head) and since each node has a built in reference to the next list, this would mean it would render the whole linked list. In other words, if a list is empty, we would return the other list (as there would only be one list to sort) 
 
 4. Next, we iterate through both lists up until the last node -- 
 Initially I had put it as `while (current1.next != null && current2.next != null)`. However this one skips the last node. This is saying while the next node is not null (which is when we are at the last node), meaning we would never reach the last node.
@@ -134,13 +134,17 @@ Therefore we have to instead do `while (current1 != null && current2 != null)`
 `mergedListCurrentNode.next = current1;`
 We use .next so that we can append it to the "fake head" and then subsequently- the .next represents the next node (or empty space) to reference the next number to add in this sorted merged list.
 
-6. One thing I had forgotten to do at first is say let's say the current node of list 1 was referenced in merged list-- well then, we no longer need to "keep" that number to compare again so we want to move one node up by updating the value of `current1` with `current1.next`.
-Further, similar to the above - regardless of whether we add something from the first list or second list, we want to move past the current node of merged list where we added the value. Remember earlier in the if/else loops, we have a line that states: "mergedListCurrentNode.next = current1"?  Hence, we update the value of `mergedListCurrentNode` to point to `mergedListCurrentNode.next`.  
-Because of that, when we iterate again and in the if/else loop and we call mergedListCurrentNode.next = ... then we can have the next empty node to add the value in. 
+6. One thing I had forgotten to do at first is say let's say the current node of list 1 was referenced in merged list-- well then, we no longer need to "keep" that number to compare again so we want to move one node up by updating the value of `current1` with `current1.next`.  
 
-7. Finally, we have code that handles cases where the lists are different sizes. This means that let's say we are done iterating through the first list, but there's still numbers in list 2. Since everything is already ordered and we were already ordering things, then we can just if the current node of the 2nd list is not null, so we can reference mergedListCurrentNode.next to current2 - which will get that current node which references the next and refernces the next, hence adding the rest of the list onwards from the current node. 
 
-8. Lastly, we do  `return mergedListResultDummyStart.next;` to return the merged list from the its actual head and onwards. 
+7. Further, similar to the above - regardless of whether we add something from the first list or second list, we want to move past the current node of merged list where we added the value. Remember earlier in the if/else loops, we have a line that states: "mergedListCurrentNode.next = current1"?  Hence, we update the value of `mergedListCurrentNode` to point to `mergedListCurrentNode.next`.  
+Because of that, when we iterate again and in the if/else loop and we call `mergedListCurrentNode.next = ...` then we can have the next empty node to add the value in. 
+For example, let's say the first iteration - we start on the `mergedListResultDummyStart` (`mergedListCurrentNode`) and we set its `.next` to `current1`. Well, then we set the next bucket already- similar to how we moved a rider into the next seat of a Ferris Wheel. So now- we update the `mergedListCurrentNode` to the seat that has the rider we just added. This way in our next iteration, we can say `mergedListCurrentNode.next` and that next seat would be filled with our next sorted value. 
+
+
+8. Finally, we have code that handles cases where the lists are different sizes. This means that let's say we are done iterating through the first list, but there's still numbers in list 2. Since everything is already ordered and we were already ordering things, then we can just if the current node of the 2nd list is not null, so we can reference mergedListCurrentNode.next to current2 - which will get that current node which references the next and references the next, hence adding the rest of the list onwards from the current node. 
+
+9. Lastly, we do  `return mergedListResultDummyStart.next;` to return the merged list from the its actual head and onwards. 
 
 
 ## Time Complexity 

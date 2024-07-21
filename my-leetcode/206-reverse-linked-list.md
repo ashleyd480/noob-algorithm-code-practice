@@ -2,7 +2,6 @@
 
 ---
 
-
 # Problem 
 
 ## Tags: 
@@ -143,3 +142,11 @@ Finally, with ` currentNode = currentNode.next;`- that results in null so the lo
 
 We return `reverseListCurrentReference` which stores that last node we were on which is the head of the new reversed linked list. 
 
+
+Note:
+I also added the following code block at the top to handle cases where the linked list is empty.
+
+```
+if (head == null) {
+    return null;
+```
