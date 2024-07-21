@@ -121,7 +121,7 @@ class Solution {
 ```
 
 However, this was not correct as for this input [4,1,2,1,2], it output 2.
-This is because hashsets aren't able to see the full list of numbers at once.
+This is because hashsets aren't able to see the full list of numbers at once. So that's why using the .add to check isn't going to work since it doesn't yet know the full list so it can't check against duplicates. 
 So we are able to add 4, 1, and 2 (and we can't add the other 1 and 2).
 With each number added the value of `singleNum` is added to the value of that number so that's why we wind up with a value of 2. 
 

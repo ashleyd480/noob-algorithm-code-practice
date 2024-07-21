@@ -42,6 +42,9 @@
 
 ## Initial Approach
 
+## Sub-Problem
+// what are we doing in each iteration, etc 
+
 
 
 ---
