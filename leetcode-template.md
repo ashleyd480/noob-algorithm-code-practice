@@ -56,9 +56,7 @@
 
 ## Any Better Algo? 
 
----
 
-# Javascript Solution
 
 ---
 
