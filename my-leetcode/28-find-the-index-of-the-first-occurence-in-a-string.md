@@ -70,9 +70,6 @@ haystack and needle consist of only lowercase English characters.\
 class Solution {
     public int strStr(String haystack, String needle) {
 
-        int firstOccurence = 0;
-        
-
         for (int i = 0; i <= haystack.length() - needle.length(); i++) {
             int j = 0; // needle index
             for (j = 0; j < needle.length(); j++) {
@@ -132,7 +129,7 @@ So how can we make just one pass?
 I visited my friend Chatgpt. He was like "duh, substring." 
 And I was like "oh yes yes- write that down, write that down!" >_< 
 
-By using a substring, we don't have to iterate through the needle.
+By using a substring, we don't have to iterate through the needle to check against each of the needle's character and can just check against the whole needle substring.
 
 ```
 class Solution {
