@@ -143,8 +143,7 @@ This traverses through the string so it's linear time complexity. As the string 
 ## Attempt 4
 I got to shoutout this Leetcoder Vikas for his awesome [solution](https://leetcode.com/problems/valid-parentheses/solutions/3399077/easy-solutions-in-java-python-and-c-look-at-once-with-exaplanation). Learned how we can apply a stack to solve this! 
 
-Basically, we know that if we see an opening parens, then it should have a closing parens to be a legit pair. For each open parens, we add its closing parens to the stack. Like say we have `{[)` --> we would add to the stack: `}, ]..` and then the next char `)`is a closing char so we use the final `else if` to check that closing char and we see "oh, it's not equal to the last character in the stack which is `]` so we know it's not a match. Alrighty- bye felicia- exit this loop by the return statement- return false and we out. 
-Oh, and that last `else if` would also go "bye felicia" if the stack were empty which means that well we never even started with an opening character. You know if you start with a closing parens, no way it's going to be a match so bye and we out! 
+
 
 ```
 public class Solution {
@@ -173,3 +172,17 @@ public class Solution {
     }
 }
 ```
+
+Basically, we know that if we see an opening parens, then it should have a closing parens to be a legit pair. For each open parens, we add its closing parens to the stack. 
+
+- Like say we have `{[)` --> we would add to the stack: `}, ]..` and then the next char `)`is a closing char so we use the final `else if` to check that closing char and we see "oh, it's not equal to the last character in the stack which is `]` so we know it's not a match. Alrighty- bye felicia- exit this loop by the return statement- return false and we out. 
+
+- Or if stack.pop does equal to c, then we know it's a matching parens and we would keep going to next char in loop. Like say when we are on the `)` of this string `[( )]` --> it would equal to the last character in the stack or `)`. Note, stack.pop does mean that char is popped off so now the next character `]` is compared against the other character in the stack `]`
+If all of them get popped up it means woohoo it's a match.
+
+Here's a drawing to help you vsiualize the stack.pop
+![Stack-20 Screenshot](assets/stack-20.png)
+The characters added to the stack are like "mirror" images of the actual string's open characters. If a closed character (a guy) doesn't see the last girl in line (in the stack) is his match- he leaves the night alone- and we exit the statemnt and return false- it's not a valid parens. 
+
+
+- Oh, and that last `else if` would also go "bye felicia" if the stack were empty which means that well we never even started with an opening character. You know if you start with a closing parens, no way it's going to be a match so bye and we out! 
