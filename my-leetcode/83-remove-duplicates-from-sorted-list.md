@@ -50,6 +50,66 @@ The list is guaranteed to be sorted in ascending order.
 # Java Solution
 
 ```
+## Attempt 1
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // head
+        // delete duplicates
+        // sort the linked list
+        // if we seen it - liek if node.next != 1, skip it
+
+        if (head == null) {
+            return null;
+        }
+
+        ListNode currentNode = new ListNode();
+        ListNode nextNode = new ListNode();
+    currentNode = head;
+       nextNode = head.next;
+        
+        while (currentNode != null && nextNode !=null) {
+            // changing the pointer
+                System.out.println("current node is " + currentNode.val);
+            System.out.println("next node is " + nextNode.val);
+
+            while (nextNode != null && currentNode.val == nextNode.val) {
+                nextNode = nextNode.next;
+            }
+            // if ( currentNode.val != nextNode.val) { // fixed it to compare the .val
+        //    else if (currentNode.val != nextNode.val ) {
+currentNode.next = nextNode;// current node still at current postion but pointint to next one 
+       
+  currentNode = nextNode; // moving to where current node is pointing to or nextNode 
+if (nextNode != null) {
+    nextNode = nextNode.next;
+}
+             } 
+    
+          
+            // System.out.println("next node is " + nextNode.val);
+
+          
+        
+
+        return head;
+    }
+
+}
+```
+
+This attempt was from my mock interview on 7/30. I was a bit rusty on linked lists--- my b... and in total n00b fashion approached it with a naive strategy.
+There were some bugs which during the evening I debugged which is how I got the final code above.
+
+- I realized when we had 1, 1, 2, 3, 3 and it output 1, 2, 3, 3-- this means that we were entering in the else statement where current != next which is not true- which means values were not correctly updating. The next needed a way to update. 
+- I was able to resolve the null pointer issues through first doing the null check of the head before initializing the variable nextNode as head.next- otherwise we can get the null pointer. Also checking for if node.next= null before moving the node.next 
+- Further used the nested while loop (yes I know - pretty yucky as not very good for time complexity- can make worse than linear)- however it was necessary in order to finish implementing the strategy of peeking ahead- where we stay on the currentNode and just keep peeking ahead until nextNode is not a dupe and point to that. 
+
+## Attempt 2
+
+(tl;dr 
+We can also just use one while loop - and compare the current and next at each iteration - if it's a duplicate: skip the duplicate and have the current point to the next next node. Otherwise if it's not a duplicate- we can move to the next node. In a sense, with this single while loop- we are still iteratively peeking ahead if it's a duplicate and only moving ahead if current does not equal to next (not duplicates). 
+)
+```
 /**
  * Definition for singly-linked list.
  * public class ListNode {
