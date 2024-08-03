@@ -12,6 +12,10 @@
 
 **Problem Text:**   
 
+Random notes to self: 
+* Don't forget return statement; also use return to exit a loop with the value
+* Check for the `not` condition first to exit out of loop 
+* Break the problem into smaller chunks 
 
 
 ## Checklist

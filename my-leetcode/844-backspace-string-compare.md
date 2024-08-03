@@ -43,7 +43,10 @@ Explanation: s becomes "c" while t becomes "b".
 // #. means backspace the last char we have seen before the #  
 // String are immutable  
 // this is out of bounds since index changes in SB   
-
+// the first time i is correct 2 - 1--> i - 0 --> i - countPound*2
+// the second i is larger by 2 vs the sbindex (because we saw #) 2--> i-  
+// countPound*2  
+// and if we had 3 - i would be larger by 4 3--> i -4--> i- countPound*2  
 
 ## Ask what are the constraints:
 
@@ -56,9 +59,7 @@ s and t only contain lowercase letters and '#' characters.
 ---
 
 # Java Solution
-
-The main idea is we are initializing two StringBuilders to hold the content of `s` and `t`. This is because strings are immutable.
-We also initialize a `sbIndex` and  `tbIndex` to allow us to find the element through the StringBuilder
+## Attempt 1
 
 ```
 class Solution {
@@ -79,11 +80,6 @@ class Solution {
             if (s.charAt(i) == '#') {
 
                 sbIndex = i - countDeletedLetter;
-
-                // the first time i is correct 2 - 1--> i - 0 --> i - countPound*2
-                // the second i is larger by 2 vs the sbindex (because we saw #) 2--> i-
-                // countPound*2
-                // and if we had 3 - i would be larger by 4 3--> i -4--> i- countPound*2
                 newStringBuildS.deleteCharAt(sbIndex); // delete the backspace
                 countDeletedLetter++; // after we see the pound sign increment at the end
 
@@ -124,7 +120,18 @@ class Solution {
     }
 }
 ```
+The main idea is we are initializing two StringBuilders to hold the content of `s` and `t`. This is because strings are immutable.
+We also initialize a `sbIndex` and  `tbIndex` to allow us to find the index of the character to delete through the StringBuilder
 
+For each string `s` and `t`, we iterate through them and we know if the `charAt(i)` is a `#`, then we can delete the backspace by: ` newStringBuildS.deleteCharAt(sbIndex);`
+
+Also, we can delete the character that precedes the backspace:
+`newStringBuildS.deleteCharAt(sbIndex - 1);`
+
+One issue I got was the array out of bounds which is because as we remove characters from stringbuilder, the index changes. To represent that, we want to ensure that as characters are removed, that we also trak that. This is where `countDeletedLetter` comes into play. It starts out at 0. So the first time, we delete a `#`, the stringbuilder index matches the string index.
+However after that, when we delete a backspace, the stringbuilder index is off by 1 (one character less)- so we do `countDeletedLetter++` to reflect that. And when we delete the preceding character, the stringbuilder index is off by 1 more (one more character less)- so we do `countDeletedLetter++` to reflect that.
+
+Finally, we only want to delete the preceding character before the `#` sign if we are not at the 0th index. That is say I have `#ab`. We can delete the #, but there is no character we can delete before the `#` as we are already at the 0th index. 
 
 ## Attempt 2
 The `newStringBuildS` and `newStringBuildT` method are duplicate blocks of code and we use two for loops.
@@ -132,7 +139,7 @@ Instead, we can simply use a helper method to further simplify.
 `resultS` and `resultT` equal to the return of the helper method which we call `procesBackspaces`. 
 
 ```
-cclass Solution {
+class Solution {
     public boolean backspaceCompare(String s, String t) {
         String resultS = processBackspaces(s);
         String resultT = processBackspaces(t);
@@ -162,9 +169,3 @@ cclass Solution {
 }
 ```
 
-## Any Better Algo 
-A better idea would be able ot 
----
-
-
-# What I Learned
