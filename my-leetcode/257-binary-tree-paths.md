@@ -124,6 +124,7 @@ Here are the steps:
 - We don't want a `null` added. Remember how the recursion ends when we call dfsInOrder(null)?
 
 4. Further, we only want to add an arrow `->` if we are not at an ending point (not a leaf)- in other words- that there is still a node on either the left or right. 
+
 ```
 if (node.left !=null ||node.right != null)
     {
@@ -131,6 +132,7 @@ if (node.left !=null ||node.right != null)
 
     }
 ```
+
 5. As mentioned, we first recurse on the left-hand side from the root. 
 For each node from there, we recursively go down the left-most path. In other words, if the node has a left child, recurse into the left subtree.
 
@@ -171,6 +173,9 @@ class Solution {
     }
 
     private void dfs(final TreeNode node, final String runningString, final List<String> paths) {
+        // Include the current node's value in the path
+        runningString += node.val;
+
         if (node.left == null && node.right == null) {
             // at leaf
             paths.add(runningString + node.val);

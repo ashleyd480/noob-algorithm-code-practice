@@ -31,7 +31,8 @@ Random notes to self:
 
 # Scratch Pad/ Pseudocode
 
-// 
+// helper functions, etc 
+// what are we doing each iteration
 
 ## Ask what are the constraints:
 
