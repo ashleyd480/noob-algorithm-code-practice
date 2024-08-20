@@ -121,7 +121,7 @@ Here is the approach:
 
 3. I also initialized two variables `cL` and `cR` to represent respectively the current character at `leftIndex` and `rightIndex`. (Note: Doing it like this means we also should ensure that we are updating their values). We also have a helper function called `isVowel` which converts those characters to lower case and then returns a boolean to see if it is a vowel. 
 
-4. The outer while loop is `while (leftIndex < rightIndex)`. This is because we want to keep going until `leftIndex` is equal to `rightIndex`. When they're equal, we're on the same letter, and there's no point to swap. When `right` > `left`, then that would mean potentially undoing the swaps.
+4. The outer while loop is `while (leftIndex < rightIndex)`. This is because we want to keep going until `leftIndex` is equal to `rightIndex`. When they're equal, we're on the same letter, and there's no point to swap. When `right` > `left`, then that would mean potentially undoing the swaps. Additionally, this left < right used in the outer loops (and also in our two inner loops as you will see) also ensures that we don't go out of bounds.
 
 5. The inner while loops then respectively check the character array from the left and right. We first loop through the left side with: `while (!isVowel(cL) && leftIndex < rightIndex)`. We will continue going up one index with each iteration. With that, we also update the value of `cL` with each iteration as well, as that updated value is needed in the next inner loop iteration. The loop continues going until either we find a vowel, or until we've looped all the way up to the `rightIndex`- at which point we exit the inner loop.
 
@@ -137,7 +137,7 @@ Here is the approach:
 
 10. Finally, after the swap, we want to move onto the next potential pair, so we want to move away from the current left and right index we are on. As such, we will increment `leftIndex` and decrement `rightIndex`. 
 
-
+11. Once we are done with all the swaps, after we are done with all the letters, then we can convert the character array back to a String with `return new String(charArray);`.
 ---
 
 
@@ -146,10 +146,11 @@ When doing a nested while loop (or this could even apply to nested for loop), yo
 
 
 I also learned that using the below way to swap doesn't work because we are working with copies. 
+
 ```
  char temp = cL;
  cL = cR;
  cR = temp;
- ```
+```
 
  Doing it this way means we are assigning `temp` to the value of `cL`. then `cL` gets assigned the value of `cR`. However, they are not actually moving around in the array. 
