@@ -180,6 +180,11 @@ sortedNames[i] = people.get(i).name;
 }
 ```
 
+## Notes
+After revisitng some concept refreshers I had was:
+- When declaring a list, make sure to put the type like List<Pair>
+- If we are iterating through with an enhanced for-loop, as Java is strictly typed, we want to ensure we declare the type like for (Pair person: personList)
+- Also, while in my latest attempt, I went with a Pair class, we could have also made a custom Person class as shown in Attempt 2. 
 ---
 
 # Javascript Solution

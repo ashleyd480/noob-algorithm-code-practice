@@ -86,6 +86,9 @@ Then, while the left side of where we are searching is less than or equal to to 
   - Or... if the middle is greater than the target, then we have aimed too high and we got to search further down, so the `right` becomes one less than the middle. This allows us to search the lower half.
 
 
+Note we check `while (left <= right)` because continuing the search after this point would mean trying to search in a non-existent or already exhausted range, which doesn't make sense.
+
+
 ## Example Breakdown 
 Input: nums = [-1,0,3,5,9,12], target = 9
 Output: 4

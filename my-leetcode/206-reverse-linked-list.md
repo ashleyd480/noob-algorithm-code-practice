@@ -150,3 +150,12 @@ I also added the following code block at the top to handle cases where the linke
 if (head == null) {
     return null;
 ```
+
+
+---
+
+
+# What I Learned
+I learned in this case unlike [problem 21](https://github.com/ashleyd480/noob-algorithm-code-practice/blob/master/my-leetcode/21-merge-two-sorted-lists.md) where we merge two linked lists- in this case we are simply reversing a linked list. That is why we don't use that notion of dummy node. Essentially, we are changing the pointers in a sense where the last one in the original list points to the one before it and so forth. 
+
+Whereas, with a merged sorted list, we initialize a dummy node and then append the actual first node on top of it. This is to simplify the process of merging so we have a consistent head that initializes our merged list, and then from there- we can make comparisons to merge the lists. 

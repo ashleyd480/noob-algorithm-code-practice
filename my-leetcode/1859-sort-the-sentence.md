@@ -83,7 +83,7 @@ I was going to say maybe extra spaces in front of word are edge case, but Leetco
 
 # Java Solution
 
-## Attempt 1: 
+## Attempt 1
 We worked on this in one of our mentor's office hours. Ty Leo for helping me whiteboard and code this out together with you during your office hour!
 
 ```
@@ -133,3 +133,68 @@ Written out that is: `completedSentence = completedSentence + " " + mySentenceAr
 We noticed a space after the last word in a failed test case. Subsequently, I used an if/else statement that would only add a space if we were not at the last word.
 
 
+## Attempt 2
+
+```
+class Solution {
+    public String sortSentence(String s) {
+
+        String[] words = s.split("\\s+");
+
+        String [] sortedString = new String [words.length];
+        int sortedStringIndex = 0;
+       
+        for (String word : words) {
+          // Extract index and convert char to an int
+            int index = word.charAt(word.length() - 1) - '0'; // Convert char to int
+            String actualWord = word.substring(0, word.length() - 1);
+
+            // Place the word in the correct position in the array
+            sortedString[index - 1] = actualWord;
+
+        }
+
+
+        // for (int i = 0; i < sortedString.length; i++) {
+        //     if (i < sortedString.length - 1) {
+        //         sortedStringResult = sortedStringResult + sortedString[i] + " ";
+
+        //     } else {
+        //         sortedStringResult = sortedStringResult + sortedString[i];
+        //     }
+
+        // }
+
+        //stringbuilder better
+         StringBuilder sortedStringResult = new StringBuilder();
+        for (int i = 0; i < sortedString.length; i++) {
+            if (i < sortedString.length - 1) {
+                sortedStringResult.append(sortedString[i]).append(" ");
+            } else {
+                sortedStringResult.append(sortedString[i]);
+            }
+        }
+
+        return sortedStringResult.toString();
+```
+
+1. In this second attempt, we have a similar start where split the sentence by whitespace into an array of words, called `words`.
+
+2. Then, we initialize a new sortedString array that has the same length as `words`.
+
+3. After that, we iterate through each word in `words`.  The `index` is the last character of each word. The `actualWord` is the actual word with the last number scrubbed off.
+
+4. We can simply just write `sortedString[index]` and that will assign the `index` position of that result array the corresponding `actualWord`.
+
+5. Then, we can either use string concatenation or stringbuilder to append the words from `sortedString`. 
+
+6. We know each word up until the last one has a space after it, hence the first if statement. Then, the final word, we simply appen the word. 
+
+
+
+---
+
+
+# What I Learned
+
+I learned in this problem how we can use the index value to write a value to an array. In this case, I don't have to go in order and add the values- but rather say I can just call arrays[i]= value;. This would assign value at that index position. Yes, I was today's years old when that clicked. 

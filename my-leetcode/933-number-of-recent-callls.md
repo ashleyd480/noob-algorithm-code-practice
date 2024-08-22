@@ -94,7 +94,7 @@ class RecentCounter {
         // Remove requests that are outside the 3000ms range
 
         while (lowerNumberOfRange > firstElementInQueue) {
-            callQueue.poll();
+            callQueue.poll(); // allow
             numberOfRequests--;
             firstElementInQueue = callQueue.peek();
 
@@ -174,3 +174,4 @@ Hence, we can use ` while (lowerNumberOfRange > firstElementInQueue)`, where `fi
 - One thing I learned is thinking about what can we compare this information against to help us make the decision of when to say remove a request. 
 - Also, another concept refresher I got is say if we initialize a variable outside of the while loop, and that variable is also used to determine the continual running of the while loop, then we should ensure we update the variable within the loop, i.e. say if it changes- otherwise we will be using the original value of that variable with every iteration leading to incorrect checks in the while loop.
 - Another interesting thing I learned. "You cannot instantiate an interface like Queue<> directly. Instead, you should use a class that implements the Queue interface, such as LinkedList<>." This concept also applies to ArrayLists too, i.e.  List<String> list = new ArrayList<>();. Notice how we can't directly instatiate an interface of List. 
+- I additionally got a refresher on the difference between static and non-static attributes or methods in Java. Static attributes or methods belong to the class itself, meaning they remain the same across all instances of the class. That's why we call them directly with the class name, like ClassName.methodName(). On the other hand, non-static attributes or methods are tied to a specific instance of the class and can vary between instances, so we call them using the instance, like instanceName.methodName().
