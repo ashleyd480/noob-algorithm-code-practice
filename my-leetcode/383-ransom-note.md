@@ -7,7 +7,7 @@
 ## Tags: 
 #found-flag, #hashmap
 
-**Link:** https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/
+**Link:** https://leetcode.com/problems/ransom-note/description/
 
 **Problem Text:**   
 

@@ -52,11 +52,12 @@ public class Solution {
 ```
 
 
-
 ---
 
 
 # What I Learned
-- We open a scanner with a new scanner instance that takes in input from the console or terminal. 
+- We open a scanner with a new scanner instance that takes in input from the console or terminal.
+`  Scanner scan = new Scanner(System.in);`
+- We then read the next line of input.  
 ` String inputString = scan.nextLine()`
-- Then, 
+-  Finally, we have to remember to close our scanner instance. 

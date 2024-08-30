@@ -86,7 +86,3 @@ Here are the steps:
 
 
 
----
-
-
-# What I Learned
