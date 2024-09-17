@@ -180,6 +180,81 @@ class Solution {
 }
 ```
 
+### Attempt 3
+On 9/17, I revisited:
+Essentially, similar logic to Attempt 2 however, I initialize the `result` with the "sad path" solution of `letters[0]`. 
+`potentialSmallestGreateest` represents the 
+Then, within the while loop, we check the whole searchable breadth of array, up to where left and right are on the the same letter. Then, we check to see if the middle letter is less than or equal to the the target, and if so, we know that can't be the `potentialSmallestGreateest`. Even if the middle is equal to the target, we would still need to keep searching because we are not searching for the target but rather `potentialSmallestGreatest`.
+
+Only if the middle letter is greater than our target could that be a ``potentialSmallestGreateest` in which case we would update the value of `potentialSmallestGreateest` to the value of that middle. However, we want to find the smallest greatest, so we would continue narrowing down the search area with binary search until we can find the smallest greatest one. 
+
+If we exhaust the search at the end of the while loop, in which case we're on the last letter and there's still no sign of a letter > target, left would = right on that last letter, and middle would be that letter. That letter would be less than target, so left would increment by 1. In that case, left would beceome equal to letters.length, in which case we'd just return the default value of `result` or `letters[0]`.  Otherwise, if we found our `potentialSmallestGreateest` at the end of the while loop, then we would just return that value. 
+
+```
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        // sorted so can use binary        // could we use hashmap and iterate through hashmap values but binary more efficient since array have indices
+        char result = letters[0];
+        int left = 0;
+        int right = letters.length - 1;
+        int middle = (left + right) / 2;
+        char potentialSmallestGreatest = letters[middle];
+        // doesn't matter if we find the target or not
+        // we check if middle > target
+        // middle would be potentialSmallestGreater - like c f j- f is potential
+        // as c (new mew middle) > target - our old middle potentialSmallestGreatest would be answer
+        // but if there is another letter that is smaller but also greater than middle then we want that one
+        while (left <= right) {
+            middle = (left + right) / 2;
+
+            if (letters[middle] <= target) {
+                left = middle + 1;
+                // in this case we are binary searching for the next largest which is why if
+                // middle is less than or equal to target- we search upper half
+            } else if (letters[middle] > target) {
+                right = middle - 1;
+                potentialSmallestGreatest = letters[middle];
+                System.out.println(potentialSmallestGreatest);
+            }
+        }
+        // we exit loop having iterated throuh all possibilities and target not found--> then check if at end of array (and not found - which would mean last execution
+        return (left == letters.length) ?result : potentialSmallestGreatest; 
+    }
+}
+```
+
+### Attempt 4
+This one is thanks to ChatGPT- a cleaner approach:
+Notice how in this case, we just have the `result` variable. 
+Result would be updated to the current middle, however we would continue iterating similar to attempt above until we 've narrowed it down.
+
+Then, if we've exited the loop, we return `result`- which either is the updated value with the `middle` that is greater than target, or `result` was never updated.  With latter, tat means we've searched all searchable area and have ended up at the last letter (as no letter found to be greater than target), in which case that last letter (middle) would be less than target - and we would return initial value of `result` or `letters[0]`
+
+```
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        int left = 0;
+        int right = letters.length - 1;
+        char result = letters[0]; // Initialize with the smallest possible result
+
+        while (left <= right) {
+            int middle = (left + right) / 2;
+
+            if (letters[middle] <= target) {
+                left = middle + 1;
+            } else {
+                result = letters[middle]; // Update result to the current letter
+                right = middle - 1;
+            }
+        }
+
+        // After the loop, `result` will be the smallest letter greater than `target`
+        // If `left` is within bounds, it means we have a valid `result`
+        return result;
+    }
+}
+```
+
 ---
 # Javascript
 

@@ -114,6 +114,9 @@ The number if 5, and 5 is less than 7...
 
 4. Hold up! So our `left` and `right` were equal in step 2 and 3. So we can't go any further right? That's because the while loop is only for when `left <= right`. So.. we return `left` or index 4.   
 
+Step 4 shows you why we return `left`. That is because if we've searched all the searchable area- which means `left` and `right` and the `middle` would be on the same number. If that number is not the target:
+- If the `middle` we are on (or number we are on is less than the target), then the updated value of `left` before the loop exits is where the number should be inserted.
+- Conversely, if `nums[middle] > target`, `right` is moved to the left with `middle = 1`. However, left does not move back (still staying at the same point as nums[middle] which is greater than the target), ensuring left always points to the insertion point. 
 
 ---
 

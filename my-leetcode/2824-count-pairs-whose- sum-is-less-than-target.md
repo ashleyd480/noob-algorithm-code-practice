@@ -48,6 +48,8 @@ Explanation: There are 10 pairs of indices that satisfy the conditions in the st
 // return countOfPairs   
 // i < j < array.length     
 
+In this case, a hashamp would not be the most straighforward. Hashmaps are better for problesm where you need to store and quickly look up values or pairs, but this problem invovles counting pair of elements where order of elements is important i.e. i < j.
+
 
 ## Ask what are the constraints:
 
