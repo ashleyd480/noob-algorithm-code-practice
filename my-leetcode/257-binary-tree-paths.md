@@ -183,11 +183,13 @@ class Solution {
         }
 
         if (node.left != null) {
-            dfs(node.left, runningString + node.val + "->", paths);
+            dfs(node.left, runningString + node.val + "->", paths); 
+            // to add -> if node.left not null so that at start of next iteration we have 1-> and can just append new val
         }
 
         if (node.right != null) {
             dfs(node.right, runningString + node.val + "->", paths);
+            // ""
         }
     }
 }

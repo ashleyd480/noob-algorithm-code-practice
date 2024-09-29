@@ -7,7 +7,7 @@
 # Problem 
 
 ## Tags: 
-#sorted-array, #for-each, #const, #concat
+#sorted-array, #for-each, #const, #concat, #two-pointer
 
 **Link:** https://leetcode.com/problems/sort-array-by-parity/description/  
 
@@ -47,6 +47,8 @@ n/a
 ---
 
 # Java Solution
+
+## Attenpt 1
 
 ```
 class Solution {
@@ -113,6 +115,76 @@ After I finished my first attempt, I asked chatGPT for idea for how to further i
 ```
 
 ---
+
+## Attempt 2
+Here is the way using two pointers.
+We use the two pointers technique when we want to swap numbers, such as in this case to swap even and odd. 
+With two pointers, we want to define our indices to represent left and right, and use the `while (left < right)` (we don't want to swap if we're on the same number). 
+Then, we want to think of subproblem which is when do want to move our pointers, and when do we want to swap. When we swap, we also want to ensure that we're 
+
+```
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        // to represent indicees
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) { // no need to swap while equal
+            
+            // with 2 pointer we want to think when we want to move forward
+            // Move left pointer forward if it's on an even number
+            if (nums[left] % 2 == 0) {
+                left++;
+            }
+
+            // Move right pointer backward if it's on an odd number
+            if (nums[right] % 2 != 0) {
+                right--;
+            }
+
+            // If left is odd and right is even, swap them
+            else if (nums[left] % 2 != 0 && nums[right] % 2 == 0) {
+                int temp = nums[left]; // swap values 1
+                // when we swap just use the indices
+                nums[left] = nums[right];
+                nums[right] = temp;
+                // because we swapped, we move both pointers down to see next two numbers 
+
+                left++;
+                right--;
+
+            }
+
+        }
+        return nums;
+
+    }
+}
+```
+
+### What I Learned 
+
+With two pointers we just want to make sure that we use the indices versus assigning the num at an indices to a variable.  
+For example, "incorrect" way would be putting this in the beginning of the while loop:
+```
+int leftNum = nums[left];
+int rightNum = nums[right];
+
+```
+Let's say we put this at the beginning of the while loop and let's say we're working with [0, 1, 2]
+Now in our swap else statement, let's assume we wrote:
+
+```
+int placeholderNum = leftNum; // 0
+nums[left] = rightNum; // assign value 2
+nums[right] = placeholderNum; // 0
+```
+
+Because left 0 is even, our left indice would increase, however in our code we did NOT update the value of leftNum to say `leftNum = nums[left]`, so `leftNum` is still the initial value from before the for loop.
+Thus, our leftNum would still be 0. `nums` at new left index position would be assigned value fo 2. Then, the `nums` and index position right would be assigned the placeholder which holds values of `leftNum` so we now have [0,1,0].
+
+Had we also made sure to update the value of `leftNum` and `rightNum` with each poinnter movement, that would have worked- but that's just another extra step to remember!
 
 # Javascript Solution
 

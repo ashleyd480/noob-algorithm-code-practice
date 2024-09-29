@@ -66,6 +66,8 @@ n/a
 
 # Java Solution
 
+## Attempt 1 
+
 ```
 class Solution {
     public int countPairs(List<Integer> nums, int target) {
@@ -91,3 +93,43 @@ Ok, so that compiled and ran and Mr. Leet was happy- said it beats 80% or someth
 Note: at first, I was thinking we could have used a hashmap here as well, however as we see it exceed 80% in terms of efficiency, I left it as that for now. Also, hashmap wouldn't really be efficient here after I tried it out and my face was like the "huh cat meme". Hashmaps are used for finding a key typically. In this example we are not trying to find "specific complements or trying to find a single pair that meets a condition", therefore we did not continue with our attempts of hashmap.
 
 
+## Attempt 2: 
+
+This can also be solved with a two pointer approach, however the constraints do show the array size is small enough that it can be solved via brute fource. Below is how we would do this with two pointer.
+
+1. You would want to go through the array, starting with `left` at index 0. 
+
+2. We would then check for vaild pairs - using `while left < right to ensure we'e searching the valid range. 
+
+3. Then, you would want to initialize the `right` pointer at the end each time. This is because if we simply moved the right pointer to the left each time, we could be missing other valid pairs. Another idea is using a value to track the value of the prior right index. Since it's sorted- if we increase our left pointer which means we're looking at a higher number, we know anything to the right of our current right pointer would result in a sum that is greater than target. However, in this case- we just reset right to the end each time just to keep the code more straightforward. 
+
+4. After, we check pairs with our first left, we want to check our next left and go through that while loop again, checking for valid pairs. This would be repeated, until we've checked all the possibel left ones. 
+
+
+```
+class Solution {
+    public int countPairs(List<Integer> nums, int target) {
+        Collections.sort(nums);  // Step 1: Sort the array
+        int count = 0;           // To count valid pairs
+
+        for (int left = 0; left < nums.size(); left++) {
+            int right = nums.size() - 1;  // Step 2: Initialize right pointer at the end
+
+            // Step 3: Iterate with the two pointers
+            while (left < right) {
+                // Fix the syntax for accessing the elements
+                if (nums.get(left) + nums.get(right) >= target) {
+                    // If the sum is too high, move the right pointer left
+                    right--;
+                } else {
+                    // If the sum is valid, all pairs (left, left+1) to (left, right) are valid
+                    count += right - left;  // Count valid pairs
+                    break;  // Break since we found valid pairs for this left index
+                }
+            }
+        }
+
+        return count; // Return the count of valid pairs
+    }
+}
+```
